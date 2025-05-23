@@ -1,0 +1,143 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mybee-shop</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+
+    body {
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .benefits {
+      background-color: white;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .benefits h2 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .benefits ul {
+      list-style: inside;
+      line-height: 1.6;
+    }
+
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+    }
+
+    .product-card {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .product-name {
+      font-weight: bold;
+      margin: 10px 0 5px;
+    }
+
+    .product-price {
+      color: green;
+      margin-bottom: 5px;
+    }
+
+    .buy-button {
+      padding: 8px 12px;
+      background-color: #25d366;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .buy-button:hover {
+      background-color: #1ebc57;
+    }
+
+    @media (max-width: 600px) {
+      .product-list {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>DAFTAR PRODUK MYBEE-SHOP</h1>
+
+  <div class="benefits">
+    <h2>Kenapa Belanja di mybee-shop?</h2>
+    <ul>
+      <li>Harga terjangkau dan kompetitif</li>
+      <li>Pelayanan cepat via WhatsApp</li>
+      <li>Barang 100% original & terpercaya</li>
+      <li>Pengiriman instan (jika digital)</li>
+      <li>Bonus & promo menarik setiap minggu</li>
+    </ul>
+  </div>
+
+  <div class="product-list" id="productList"></div>
+
+  <script>
+    const waNumber = "6285724857724";
+
+    const products = [
+      { name: "PANEL FF", price: "Rp 50.000", image: "https://files.catbox.moe/lfg92e.jpg" },
+      { name: "Produk B", price: "Rp 75.000", image: "https://files.catbox.moe/lfg92e.jpg" },
+      { name: "Produk C", price: "Rp 100.000", image: "https://files.catbox.moe/lfg92e.jpg" }
+    ];
+
+    const productList = document.getElementById("productList");
+
+    products.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">${product.price}</div>
+        <button class="buy-button" onclick="orderNow('${product.name}')">Beli</button>
+      `;
+      productList.appendChild(card);
+    });
+
+    function orderNow(productName) {
+      const message = encodeURIComponent(`Halo! Saya ingin membeli *${productName}*`);
+      const url = `https://wa.me/${waNumber}?text=${message}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
